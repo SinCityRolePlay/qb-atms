@@ -134,6 +134,7 @@ RegisterNetEvent('qb-atms:server:doAccountWithdraw', function(data)
                     xPlayer.Functions.AddMoney('cash', tonumber(data.amount))
                     dailyWithdraws[cardHolder] = dailyWithdraws[cardHolder] + tonumber(data.amount)
                     TriggerClientEvent('QBCore:Notify', src, "Withdraw $" .. data.amount .. ' from credit card. Daily Withdraws: ' .. dailyWithdraws[cardHolder], "success")
+                    TriggerEvent('qb-log:server:CreateLog', 'banking', 'Banking', 'red', "**"..GetPlayerName(xPlayer.PlayerData.source) .. " (citizenid: "..xPlayer.PlayerData.citizenid.." | id: "..xPlayer.PlayerData.source..")** made a cash withdrawal from an ATM $"..data.amount.." successfully.") -- added by Runble to log ATM transactions
                 else
                     TriggerClientEvent('QBCore:Notify', src, "Not Enough Money", "error")
                 end
